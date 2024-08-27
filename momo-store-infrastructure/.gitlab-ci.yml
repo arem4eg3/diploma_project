@@ -1,0 +1,22 @@
+stages:
+  - module-pipelines
+
+momo-backend-helm:
+  stage: module-pipelines
+  trigger:
+    include:
+      - "/momo-store-chart/momo-backend-helm/.gitlab-ci.yml"
+    strategy: depend
+  only:
+    changes:
+      - momo-store-chart/momo-backend-helm/**/*
+
+momo-frontend-helm:
+  stage: module-pipelines
+  trigger:
+    include:
+      - "/momo-store-chart/momo-frontend-helm/.gitlab-ci.yml"
+    strategy: depend
+  only:
+    changes:
+      - momo-store-chart/momo-frontend-helm/**/*

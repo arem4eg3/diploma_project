@@ -1,0 +1,14 @@
+stages:
+  - release
+
+release-to-nexus:
+  stage: release
+  image: alpine/helm
+  tags:
+    - k8s
+  script:
+    - cd momo-store-chart/momo-frontend-helm
+    - >
+      sed -i "s/version: 0.1.[0-9]\+/version: 0.1.$CI_PIPELINE_ID/g" Chart.yaml
+    - helm package .
+    - curl -u $NEXUS_USERNAME:$NEXUS_PASSWORD  https://nexus.praktikum-services.tech/repository/std-028-38-momo-store-frontend/ --upload-file momo-store-frontend-*

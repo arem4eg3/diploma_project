@@ -1,0 +1,1 @@
+helm upgrade --install ingress-nginx . -n ingress-nginx --create-namespace

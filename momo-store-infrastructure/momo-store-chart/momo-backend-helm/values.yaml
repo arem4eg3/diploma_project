@@ -1,0 +1,32 @@
+containers:
+  image: gitlab.praktikum-services.ru:5050/std-028-38/momo-store/momo-store-backend
+  tag: latest
+imagePullSecrets: myregistrykey
+restartPolicy: Always
+imagePullPolicy: IfNotPresent
+annotations:
+  prometheus.io/path: /metrics
+  prometheus.io/port: "8081"
+  prometheus.io/scrape: "true"
+livenessProbe:
+  tcpSocket:
+    port: 8081
+  initialDelaySeconds: 15
+  periodSeconds: 20
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+    
+secret:
+  dockerconfigjson: ""
+
+hpa:
+  maxReplicas: 10
+  minReplicas: 1
+
+service:
+  port: 8081

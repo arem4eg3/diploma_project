@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Chart.Name }}
+  name: {{ .Release.Name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      annotations:
+        {{- toYaml .Values.annotations | nindent 8 }} 
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      restartPolicy: {{ .Values.restartPolicy }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets }}
+      containers:
+      - image: {{ .Values.containers.image }}:{{ .Values.containers.tag | default .Chart.AppVersion }}
+        name: {{ .Chart.Name }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
+        livenessProbe:
+          {{- toYaml .Values.livenessProbe | nindent 10 }}
+        resources:
+          {{- toYaml .Values.resources | nindent 10 }}
+
