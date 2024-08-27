@@ -116,7 +116,7 @@ terraform apply -var="folder_id=$YC_FOLDER_ID"
 # Monitoring & Logging
 
 - [Prometheus](https://prometheus.artem4eg.cc/)
-- [Grafana](https://grafana.artem4eg.cc/) (admin/password)
+- [Grafana](https://grafana.artem4eg.cc/)
 
 - [infrastructure](https://grafana.artem4eg.cc/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=&var-namespace=default)
 
